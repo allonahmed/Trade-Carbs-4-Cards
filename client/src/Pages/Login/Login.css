@@ -1,5 +1,134 @@
-.login-text {
+/* .login-text {
     color: green;
     text-align: center;
     padding-top: 20rem;
+} */
+
+/* #test {
+    background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+} */
+
+.form-homepage {
+    background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
+
+.form-container {
+    margin: 0 auto 0 auto;
+    border: 2px solid #ff7733;
+    width: 50%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 20px;
+    background-color: white;
+    /* position: relative;
+    display: flex;
+    align-items: center; */
+    /* height: 100%; */
+}
+
+/* form {
+    height: 100%;
+} */
+
+.form-header {
+    text-align: center;
+    color: #64B5AC;
+    font-weight: 400;
+    font-size: 30px;
+    margin: 10px;
+}
+
+/* #login-form {
+    margin: 0 auto;
+    width: 90%;
+} */
+
+.form-field {
+    margin: 0 auto 20px auto;
+    width: 50%;
+}
+
+.form-field label {
+    display: block;
+    text-align: left;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.form-field input[type]:not([type="submit"]){
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid gray;
+}
+
+.form-field input[type]:not([type="submit"]):focus {
+    border: 2px solid #64B5AC;
+    box-shadow: 0 0 5px gray;
+}
+
+.form-field input[type="submit"] {
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #64B5AC;
+    background-color: #64B5AC;
+}
+
+.form-field input[type="submit"]:hover {
+    background-color: #59a098;
+    cursor: pointer;
+}
+
+.form-field input[type="submit"]:active {
+    box-shadow: 0 0 5px #64B5AC;
+}
+
+#signup-link {
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+#signup-link:link {
+    color: #64B5AC;
+}
+
+#signup-link:visited {
+    color: #64B5AC;
+}
+
+#signup-link:hover {
+    color: #457c76;
+}
+
+#signup-link:active {
+    color: #325a55;
+}
+
+.signup-p {
+    text-align: center;
+    margin: 20px 10px;
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 731px){
+    .form-container {
+        /* border: 2px solid red; ONLY FOR DEV PURPOSES */
+        width: 90%;
+    }
+
+    /* .form-field {
+        margin: 0 auto 20px auto;
+    } */
+}
+
+/* @media only screen and (max-width: 575px) {
+    .login-container {
+        border: 2px solid blue;
+        width: 90%;
+    }
+} */
