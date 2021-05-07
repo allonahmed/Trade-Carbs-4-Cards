@@ -1,307 +1,27 @@
-.container {
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  flex-direction: column;
-  height: 120rem;
+.container { 
+  height: 80rem;
   background-color: #fde9e2;
   position: relative;
   width: 100%;
-  
 }
 
-.draw-button {
-  margin-top: 5rem;
-  font-weight: 600;
-  line-height: normal;
-  cursor: pointer;
-  /* -moz-user-select: text; */
-  display: block;
-  height: 5rem;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  padding: 2rem 3.8rem 3rem;
-  background-color: #64b5ac;
-  color: #666;
-  border: .15rem solid #666;
-  border-radius: 6px;
-  margin-bottom: .5rem;
-  transition: all 0.5s ease;
-  overflow: hidden;
-  position: relative;
-  /* margin: 0 auto; */
-}
-.draw-button:after {
-  content: "";
-  display: block;
-  height: 7px;
+.home-container {
   width: 100%;
-  background-image: repeating-linear-gradient(
-    45deg,
-    #666,
-    #666 1px,
-    transparent 2px,
-    transparent 5px
-  );
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  border-top: 1px solid #666;
-  position: absolute;
-  left: 0;
-  bottom: 0rem;
-  background-size: 7px 7px;
-}
-
-.draw-button:hover {
-  background-color: #64b5ac;
-  background-image: linear-gradient(315deg, #64b5ac 0%, #FDE9E2 74%);
-  border-color: #000;
-}
-.draw-button:active,
-.draw-button:visited,
-.draw-button:focus {
-  outline: none;
-}
-.draw-button:hover:after {
-  background-image: repeating-linear-gradient(
-    45deg,
-    #64b5ac,
-    #000 1px,
-    transparent 2px,
-    transparent 5px
-  );
-  border-top: 1px solid #000;
-  -webkit-animation: stripe-slide 12s infinite linear forwards;
-  animation: stripe-slide 12s infinite linear forwards;
-}
-.draw-button:disabled {
-  cursor: not-allowed;
-}
-@keyframes stripe-slide {
-  0% {
-    background-position: 0% 0;
-  }
-  100% {
-    background-position: 100% 0;
-  }
-}
-
-.card {
-  margin-top: 5rem;
-  position: absolute;
-  height: 340px;
-  width: 250px;
-  border: 2px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 7rem;
-  border-radius: 15px;
-  background: white;
-  opacity: 0;
-  top: 0;
-  opacity: 0;
-  animation: fadeIn 0.1s;
-  animation-delay: 0.025s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes fadeIn {
-  99% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-.card::before, .card::after {
-  content: attr(data-value);
-  letter-spacing: .1rem;
-  font-size: 2rem;
-  position: absolute;
-                                                           
-}
-
-.card::before {
-  top: .5rem;
-  left: .5rem;
-}
-
-.card::after {
-  bottom: .5rem;
-  right:.5rem;
-  transform: rotate(180deg);
-}
-
-.card:hover {
-  border: 2px solid#64B5AC;
-  font-size: 8rem;
-}
-
-.card-info {
-  margin-top: 5rem;
-  width: 100%;
-  text-align: center;
-  background: #000;
-  color: #64B5AC;
-  height:20rem;
-  position: relative;
-  
-}
-
-
-.red {
-  color: red;
-}
-
-.black {
-  color: black;
-}
-
-.game-container {
+  height: 80rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 130rem;
-  width: 100%;
-  
-  /* background: #000; */
-}
-
-.deck-spot {
-  width: 100%;
   position: relative;
-  display: flex;
-  justify-content: center;
-  /* max-width: 162px; */
-  text-align: center;
-  height: 32rem;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 17rem;
-  margin-top: 1vh;
-
+  background: linear-gradient(rgba(253, 233, 226, 0.7), rgba(0,0,0,.1)),  url('https://files.wallpaperpass.com/2019/10/fitness%20wallpaper%20198%20-%201920x1080.jpg') center/cover fixed no-repeat;
 }
 
-
-
-.pregame {
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60rem;
-  width: 100%;
+.edit-background {
+  background: linear-gradient(rgba(253, 233, 226, 0.4), rgba(0,0,0,.2)),  url('https://files.wallpaperpass.com/2019/10/fitness%20wallpaper%20198%20-%201920x1080.jpg') center/cover fixed no-repeat;
 }
 
-.none {
-  display: none;
-  right: -100%;
-}
-@media only screen and (max-width: 750px){
-  .container{
-      margin-top: 5rem;
-  }
-  .card {
-    height: 230px;
-    width: 175px;
-  }
-  .deck-spot {
-    padding-right: 12rem;
-  }
-}
-.pregame-button {
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 5rem;
-  max-width: 8rem;
-  padding: 2rem 2rem;
-  z-index: 1;
-  opacity:1;
-}
-
-.pregame-button a {
-  text-decoration: none;
-  color: black;
-}
-
-.pre-play-div {
-  width: 100%;
-  height: 100%;
-  height: 100rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
-  background: linear-gradient(rgba(253, 233, 226, 0.7), rgba(0,0,0,.4)),  url('https://files.wallpaperpass.com/2019/10/fitness%20wallpaper%20198%20-%201920x1080.jpg') center/cover fixed no-repeat;
-
-}
-
-.wallpaper-edit {
-  background: linear-gradient(rgba(0,0,0, .4), rgba(253, 233, 226, .9)),  url('https://files.wallpaperpass.com/2019/10/fitness%20wallpaper%20198%20-%201920x1080.jpg') center/cover fixed no-repeat;
-}
-/* 
-
-.play-button {
-  position: static;
-  object-fit: cover;
-  height: 100px;
-  text-align: center;
-  cursor: pointer;
-  transition: 1s;
-  opacity: 1;
-}
-
-.circle-border {
-  position: relative;
-  height: 10rem;
-  width: 10rem;
-  border-radius: 50%;
-  transition: all .8s ease-in-out;
-  
-}
-
-.circle {
-  background-color: #000000;
-  background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
-  height: 10rem;
-  width: 10rem;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background-clip: content-box;
-  transition: all .8s ease-in-out;
-}
-.triangle {
-  background: transparent;
-  width: 0;
-  height: 0;
-  position: absolute;
-  margin-left: 1rem;
-  border-top: 2rem solid transparent;
-  border-left: 4rem solid rgba(100,181,172,.6);
-  border-bottom: 2rem solid transparent;
-}
-.triangle:hover{
-  border-left: 4rem solid rgba(100,181,172,.9);
-
-}
-.circle-border:hover {
-  transform: scale(1.5);
-} */
-/* .adjectives {
-  height: 5rem;
-} */
-.intro-text {
-  /* padding-bottom: 10rem; */
-  top:25rem;
+/* intro text on home page */
+.home-text {
+  top:3rem;
   position: absolute;
   text-align: center;
   color:transparent;
@@ -310,42 +30,65 @@
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
-  /* background: #000; */
   height: 15rem;
 }
 
-
 span {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-font-size: 3rem; 
-text-shadow: 2px 2px 3px black, 0 0 5px #FDE9E2;
-/* height: 5rem; */
-color: black
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 3rem; 
+  text-shadow: 2px 2px 3px black, 0 0 5px #FDE9E2;
+  color: black
 }
 .span-hover {
-text-shadow: 2px 2px 3px black, 0 0 5px #FDE9E2;
+  text-shadow: 2px 2px 3px black, 0 0 5px #FDE9E2;
 }
 
-
-
-/* play/login buttons */
-
+/* buttons */
 .home-button-div {
-display: flex;
-flex-direction: column;
-}
+  display: flex;
+  flex-direction: column;
+  padding-top: 20rem;
+  margin-top: 5rem;
 
+}
 .home-button {
-background: #FDE9E2;
-padding: 2rem 2rem;
-/* max-width: 10rem; */
-
-border-radius: 25px;
+  background: #64B5AC;
+  padding: 1rem 1rem;
+  border-radius: 25px;
+  display: flex;
+  min-height: 5rem;
+  min-width: 30rem;
+  justify-content: space-between;
+  color: white;
+  font-size: 1.5rem;
 }
-.home-button:hover {
-background:#64b5ac ;
-}
-
 .home-button:first-child {
-margin-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+.home-button p {
+  font-size: 1.5rem;
+  margin-top: .6rem;
+  margin-left: 5rem;
+}
+
+.home-button-img {
+  height: 3rem;
+  /* padding-left: 3rem; */
+}
+
+.home-button:hover {
+  background: white;
+  color: black;
+}
+
+
+
+@media only screen and (max-width: 750px){
+  .container{
+      margin-top: 3rem;
+  }
+  .home-button-div{
+    margin-top: 0rem;
+  }
+
 }

@@ -1,0 +1,60 @@
+.card {
+    margin-top: 3rem;
+    position: absolute;
+    height: 340px;
+    width: 250px;
+    border: 2px solid black;
+    font-size: 7rem;
+    border-radius: 15px; /* think about how we will change this to reflect skins*/
+    background: white;
+    padding-top: 90px;
+}
+@keyframes fadeIn {
+    99% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;  
+    }
+}
+
+.card::before, .card::after {
+    content: attr(data-value);
+    letter-spacing: .1rem;
+    font-size: 2rem;
+    position: absolute;                                                           
+}
+  
+.card::before {
+    top: .5rem;
+    left: .5rem;
+}
+
+.card::after {
+    bottom: .5rem;
+    right:.5rem;
+    transform: rotate(180deg);
+}
+
+.card:hover {
+    border: 2px dotted black;
+}
+
+.red {
+    color: red;
+}
+
+.black {
+    color: black;
+}
+
+@media only screen and (max-width: 750px){
+    .card {
+        height: 280px;
+        width: 195px;
+        padding-top: 85px;
+        font-size: 4rem;
+        margin-top: 4rem;
+    }
+
+}

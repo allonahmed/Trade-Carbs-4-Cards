@@ -1,0 +1,13 @@
+
+
+-FIX UP HOMEPAGE A BIT (CAN SAVE FOR LATER HONESTLY) (1HR)
+
+
+
+
+-BUG got to fix the radio button that stores what workouts they can do. right now they can only do a single workout.
+maybe make the selectExersice an array and everytime, you check the radio, push to array, and if you uncheck, remove 
+
+--make the user info a dropdown menu
+
+finish dropdown menu, change style instead of class

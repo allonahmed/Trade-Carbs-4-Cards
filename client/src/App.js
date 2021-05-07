@@ -14,6 +14,7 @@ import LoginPage from './Pages/Login/LoginPage'
 import SignUpPage from './Pages/SignUp/SignUpPage'
 import ChallengesPage from './Pages/Challenges/ChallengesPage'
 import ContactPage from './Pages/Contact/ContactPage'
+import Game from './Pages/Game/Game'
 import Logo from './Media/Logo.png'
 
 
@@ -37,7 +38,7 @@ const Navigation  = (props) => {
         <li className = 'nav-item'><NavLink className= 'nav-link' exact to= '/contacts'>Contacts</NavLink></li>
         <li className = 'nav-item'><NavLink className= 'nav-link' exact to= '/merch'>Merch</NavLink></li>
         <li className = 'nav-item'><NavLink className= 'nav-link' exact to= '/login'>Login</NavLink></li>
-        <li className = 'nav-item'><NavLink className= 'nav-link nav-highlight' exact to= '/signup'>Sign Up</NavLink></li>
+        <li className = 'nav-item'><NavLink className= 'nav-link nav-highlight' exact to= '/signup'>Sign Up </NavLink></li>
       </ul>
     </nav>
   )
@@ -56,7 +57,9 @@ class App extends React.Component {
             <Route path ='/about-us' component={AboutUs}></Route>
             <Route path ='/contacts' component={ContactPage}></Route>
             <Route path='/challenges' component={ChallengesPage}></Route>
+            <Route path='/game' component={Game}></Route>
             <Route exact path='/' component={HomePage}></Route>
+            
           </Switch>
         </div>
       </Router>
