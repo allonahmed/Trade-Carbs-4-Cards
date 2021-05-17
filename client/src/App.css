@@ -1,83 +1,84 @@
 * {
   font-size: 1rem;
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   /* overflow: hidden; */
 }
 
+button {
+  cursor: pointer;
+}
+
 .app-logo {
-  height:3.5rem;
+  height: 3.5rem;
 }
 /* navbar css */
 
 .navbar {
-  background-color: #FDE9E2;
+  background-color: #fde9e2;
 
   /* background-image: linear-gradient(315deg, #000000 0%, #414141 74%); */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   max-height: 6rem;
-  border-bottom: 1px solid #B09E9A;
-  top:0;
- }
-  
- .nav-list {
-   display: flex;
-   justify-content: flex-end;
-   width: 90%;
-   list-style-type: none;
-   background: #fde9e2;
+  border-bottom: 1px solid #b09e9a;
+  top: 0;
+}
 
- }
- .nav-item {
-   padding: 2rem .2rem;
-   background: #FDE9E2;
-   
- }
- .nav-logo {
-  padding:0;
-  transition: all .6s ease-in-out;
+.nav-list {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  list-style-type: none;
+  background: #fde9e2;
+}
+.nav-item {
+  padding: 2rem 0.2rem;
+  background: #fde9e2;
+}
+.nav-logo {
+  padding: 0;
+  transition: all 0.6s ease-in-out;
   /* border-radius: 20px; */
 }
- .nav-link {
-   color: black;
-   font-weight:300;
-   text-decoration: none;
-   background: #FDE9E2;
-   max-height: 3rem;
-   padding: .7rem 1rem;
-   border-radius: 20px;
- }
+.nav-link {
+  color: black;
+  font-weight: 300;
+  text-decoration: none;
+  background: #fde9e2;
+  max-height: 3rem;
+  padding: 0.7rem 1rem;
+  border-radius: 20px;
+}
 
- .icon:hover {
-   color: #FDE9E2;
-   transform: scale(1.5);
-   transition: all 0.5s ease-in-out;
- }
+.icon:hover {
+  color: #fde9e2;
+  transform: scale(1.5);
+  transition: all 0.5s ease-in-out;
+}
 
- .nav-logo:hover {
+.nav-logo:hover {
+  transform: scale(1.2);
+}
+.nav-highlight {
+  background-color: #64b5ac;
+}
 
-   transform: scale(1.2);
- }
- .nav-highlight {
-   background-color: #64b5ac;
- }
+.nav-link:hover {
+  background: #64b5ac;
+  color: white;
+  transition: all 0.6s ease-in-out;
+}
 
- .nav-link:hover {
-   background: #64B5AC;
-   color: white;
-   transition: all 0.6s ease-in-out;
- }
+.fa-arrow-up1 {
+  transform: rotate(180deg);
+  transition: all 0.6s ease-in-out;
+}
 
- .fa-arrow-up {
-   transform: rotate(180deg);
-   transition: all 0.6s ease-in-out;
- }
-
- .fa-arrow-down {
+.fa-arrow-down1 {
   transform: rotate(-180deg);
   transition: all 0.5s ease-in-out;
 }
@@ -85,67 +86,64 @@
   color: black;
   font-size: 5rem;
 }
- .icon {
-   display: none;
-   font-size: 1.5rem;
- }
+.icon {
+  display: none;
+  font-size: 1.5rem;
+}
 
-
-
- @media only screen and (max-width: 760px)
- {
-   .icon {
+@media only screen and (max-width: 760px) {
+  .icon {
     display: block;
     position: absolute;
     right: 1rem;
     top: 1.6rem;
     cursor: pointer;
-   }
-   .navbar {
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     position: fixed;
-     width: 100%;
-     z-index: 99;
-     transition: all 2s ease-in-out;
-   }
-   .nav-list {
-     flex-direction: column;
-     position: fixed;
-     width: 100%;
-     top: 4.93rem;
+  }
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+    transition: all 2s ease-in-out;
+  }
+  .nav-list {
+    flex-direction: column;
+    position: fixed;
+    width: 100%;
+    top: 4.93rem;
 
-     right: 0;
-     align-items: center;
-     justify-content: center;
-     background-color: rgba(253, 233, 226);
-     border-bottom: .15rem solid #B09E9A;
-   }
-   .nav-logo {
-     background-color: #B09E9A;
-     width:100%;
-     text-align: center;
-     /* border-radius: 0px; */
-   }
-   .nav-item {
-    padding: .6rem .5rem;
-   }
-   .nav-link {
-     padding: .5rem 3rem;
-   }
-   .nav-link:last-child {
-     margin-bottom: .1rem;
-   }
-   .nav-logo:hover {
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(253, 233, 226);
+    border-bottom: 0.15rem solid #b09e9a;
+  }
+  .nav-logo {
+    background-color: #b09e9a;
+    width: 100%;
+    text-align: center;
+    /* border-radius: 0px; */
+  }
+  .nav-item {
+    padding: 0.6rem 0.5rem;
+  }
+  .nav-link {
+    padding: 0.5rem 3rem;
+  }
+  .nav-link:last-child {
+    margin-bottom: 0.1rem;
+  }
+  .nav-logo:hover {
     transform: scale(1);
     transition: all 0.5s ease-in-out;
   }
-  .close{
+  .close {
     right: -100%;
     transition: all 1.1s ease-in-out;
   }
   .open {
     transition: all 1.1s ease-in-out;
   }
- }
+}

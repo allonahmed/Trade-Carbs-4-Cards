@@ -11,3 +11,9 @@ maybe make the selectExersice an array and everytime, you check the radio, push 
 --make the user info a dropdown menu
 
 finish dropdown menu, change style instead of class
+
+
+---maybe use react card flip to flip cards from a facedown deck.
+
+
+---level up system

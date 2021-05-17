@@ -29,7 +29,7 @@ const Navigation  = (props) => {
     <nav className= 'navbar'>
       <NavLink className= 'nav-item nav-logo' exact to= '/'><img className = 'app-logo'src={Logo} alt='Carbs4Cards'></img></NavLink>
       <div className='icon' onClick={HandleClick}>
-        <i className={click ? "fa fa-arrow-down" :"fa fa-arrow-up"}></i>  {/*if click is true, call the arrow down class, else call the arrow up class*/}
+        <i className={click ? "fa fa-arrow-down fa-arrow-down1" :"fa fa-arrow-up fa-arrow-up1"}></i>  {/*if click is true, call the arrow down class, else call the arrow up class*/}
       </div> 
       <ul className = {click ?'nav-list open': 'close nav-list'}>
 
