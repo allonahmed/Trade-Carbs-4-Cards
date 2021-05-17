@@ -30,6 +30,7 @@ export default class Game extends Component {
         height: "10rem",
         color: "black",
       },
+      enhance: false,
       selectedInterval: "",
       countDown: "false",
       userInfoClass: "user-info",
@@ -164,7 +165,13 @@ export default class Game extends Component {
 
     return (
       <div className="container">
-        <div className="game-container">
+        <div
+          className="game-container"
+          style={this.state.enhance ? { width: "100%", height: "100vh" } : null}
+        >
+          {/* <button onClick={() => this.setState((state) => ({ enhance: true }))}>
+            enhance
+          </button> */}
           <div className="deck-spot">
             {this.state.play === true ? ( // only renders the cardList if the count is under 52, which will occur when you click the button after the first time
               <div className="two-decks">

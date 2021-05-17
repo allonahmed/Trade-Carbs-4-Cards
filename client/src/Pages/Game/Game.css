@@ -119,12 +119,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 4rem;
-  height: 38rem;
-  width: 80%;
+  /* margin-top: 4rem; */
+  height: 100vh;
+  width: 100%;
   z-index: 0;
   overflow: hidden;
-  border-radius: 50px;
+  /* border-radius: 50px; */
   background-color: black;
   background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
 }
@@ -165,7 +165,7 @@
   height: calc(100% - 15px);
   background: black;
   background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
-  border-radius: 50px;
+  /* border-radius: 50px; */
 }
 
 /* spot for just the card deck */
@@ -270,7 +270,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: 15px;
   border: 2px solid black;
   background: var(--green-grad);
 }
@@ -397,7 +397,7 @@ input {
   }
   .game-container {
     /* height: 38rem; */
-    width: 80%;
+    /* width: 80%; */
   }
 }
 
