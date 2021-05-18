@@ -24,7 +24,7 @@ export default class Game extends Component {
       timed: false,
       selectedTime: "",
       selectedExercise: "",
-      styleTimedButton: { height: "10rem" },
+      styleTimedButton: { height: "10rem", color: "black" },
       styleUntimedButton: {
         background: "#fde9e2",
         height: "10rem",
@@ -86,13 +86,13 @@ export default class Game extends Component {
     const TimedClick = () => {
       this.setState((state) => ({
         timed: true,
-        styleTimedButton: { background: "#fde9e2", color: "black" },
+        styleTimedButton: {
+          background: "#fde9e2",
+          color: "black",
+          border: "3px solid rgba(255, 0, 0)",
+        },
         styleUntimedButton: {
-          background: `linear-gradient(
-            274deg,
-            rgba(100, 181, 172, 1) 1%,
-            rgba(4, 115, 102, 1) 55%
-          )`,
+          border: "3px solid rgba(0, 0, 0, 0.5)",
         },
       }));
     };
@@ -100,15 +100,12 @@ export default class Game extends Component {
       this.setState((state) => ({
         timed: false,
         styleTimedButton: {
-          background: `linear-gradient(
-            274deg,
-            rgba(100, 181, 172, 1) 1%,
-            rgba(4, 115, 102, 1) 55%
-          )`,
+          border: "3px solid rgba(0, 0, 0, 0.5)",
+
           height: "10rem",
         },
         styleUntimedButton: {
-          background: "#fde9e2",
+          border: "3px solid rgba(255, 0, 0)",
           height: "10rem",
           color: "black",
         },
@@ -133,12 +130,13 @@ export default class Game extends Component {
       ) {
         style = {
           textDecoration: "none",
-          color: "#fde9e2",
+          color: "black",
         };
       }
       if (this.state.selectedExercise === ex) {
         style.color = "black";
         style.background = "#fde9e2";
+        style.border = "3px solid rgba(255, 0, 0)";
       }
 
       return style;
@@ -317,7 +315,7 @@ export default class Game extends Component {
                 ) : null}
                 <div className="button-directions">
                   <button
-                    className=" draw-button next-button"
+                    className=" draw-button next-button back"
                     onClick={() => {
                       this.setState((state) => ({ question1: false }));
                     }}
@@ -325,7 +323,7 @@ export default class Game extends Component {
                     <i class="fas fa-arrow-alt-circle-left"></i> BACK
                   </button>
                   <button
-                    className=" draw-button next-button"
+                    className=" draw-button next-button next"
                     onClick={() => {
                       this.setState((state) => ({ play: true }));
                     }}

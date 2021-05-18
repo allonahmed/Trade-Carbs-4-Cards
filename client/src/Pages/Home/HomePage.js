@@ -6,9 +6,14 @@ import Login from "../../Media/login.png";
 import Guest from "../../Media/guest.png";
 import { Link } from "react-router-dom"; // to link to other pages when clicking on login button
 import TextLoop from "react-text-loop";
+import Card from "../../Components/Card/Card";
+import Deck from "../../Components/Deck/Deck";
+import { randomNumber } from "../../helpers";
+import { AnimateKeyframes } from "react-simple-animate";
 
 export default class HomePage extends Component {
   constructor(props) {
+    const deck = new Deck();
     super(props);
     this.state = {
       guest: false, //set status for whether the user wants to play as a guest
@@ -16,8 +21,10 @@ export default class HomePage extends Component {
       buttonClass: "home-button", // to manage the button classlist
       containerClass: "home-container", // to manage the button classlist
       buttonMouseOver: false, // handles what to do when hovering over the buttons
+      myDeck: deck.deck,
     };
   }
+
   render() {
     const GuestClick = () => {
       // for info purposes
@@ -29,8 +36,7 @@ export default class HomePage extends Component {
     const MouseOn = () => {
       // if Moused over, changes the state of the container class, to add styling to other elements when hovering over our buttons
       return this.setState((state) => ({
-        containerClass: (state.containerClass =
-          "home-container edit-background"),
+        containerClass: (state.containerClass = "home-container"),
         buttonMouseOver: (state.buttonMouseOver = true),
       }));
     };
@@ -42,8 +48,93 @@ export default class HomePage extends Component {
       }));
     };
 
+    const styleFloat = (data) => {
+      let x = randomNumber(-200, 90, 1);
+      let y = randomNumber(-10, 100, 1);
+      let rx = randomNumber(-5, 5, 1);
+
+      let style = {
+        marginLeft: `${x}%`,
+        marginTop: `${y}vh`,
+        color: "black",
+      };
+      console.log("data", data);
+      if (data) {
+        if (data[data.length - 1] === "♦" || data[data.length - 1] === "♥") {
+          style.color = "red";
+        }
+      }
+      return style;
+    };
+    const styleFloat1 = (data) => {
+      let x = randomNumber(-30, 90, 1);
+      let y = randomNumber(-100, 50, 1);
+      let rx = randomNumber(-5, 5, 1);
+
+      let style = {
+        marginLeft: `${x}%`,
+        marginTop: `${y}px`,
+        color: "black",
+      };
+      console.log("data", data);
+      if (data) {
+        if (data[data.length - 1] === "♦" || data[data.length - 1] === "♥") {
+          style.color = "red";
+        }
+      }
+      return style;
+    };
+
     return (
       <div class="container">
+        {this.state.myDeck.map((val, i) => {
+          if (i % 2 === 0) {
+            return (
+              <AnimateKeyframes
+                play={true}
+                duration={5}
+                iterationCount="infinite"
+                keyframes={[
+                  `transform: translateY(0px) `,
+                  `transform: translateY(100px) `,
+                  `transform: translateY(0)`,
+                ]}
+              >
+                <div
+                  key={i}
+                  className="floating-card-div "
+                  style={styleFloat(this.state.myDeck[i])}
+                  data-value={this.state.myDeck[i]}
+                >
+                  {this.state.myDeck[i][this.state.myDeck[i].length - 1]}
+                </div>
+              </AnimateKeyframes>
+            );
+          } else {
+            return (
+              <AnimateKeyframes
+                play={true}
+                duration={5}
+                iterationCount="infinite"
+                keyframes={[
+                  `transform: translateY(0px) `,
+                  `transform: translateY(-100px) `,
+                  `transform: translateY(0)`,
+                ]}
+              >
+                <div
+                  key={i}
+                  className="floating-card-div "
+                  style={styleFloat(this.state.myDeck[i])}
+                  data-value={this.state.myDeck[i]}
+                >
+                  {this.state.myDeck[i][this.state.myDeck[i].length - 1]}
+                </div>
+              </AnimateKeyframes>
+            );
+          }
+        })}
+
         <div className={this.state.containerClass}>
           <div className="home-text">
             <TextLoop className="adjectives" interval={1000} mask={true}>
@@ -60,29 +151,37 @@ export default class HomePage extends Component {
             <Link to="/login" style={{ textDecoration: "none" }}>
               {" "}
               <button
-                className={this.state.buttonClass}
-                onMouseOver={MouseOn}
-                onMouseLeave={MouseLeave}
+                className={`${this.state.buttonClass} +  login`}
+                style={{
+                  background: "white",
+                  color: "black",
+                  border: "2px solid black",
+                }}
               >
                 {" "}
                 <p style={{ marginLeft: "4.7rem" }}>Log In </p>{" "}
-                <i class="fas fa-sign-in-alt"></i>
+                <i
+                  style={{ fontSize: "2.8rem", color: "black" }}
+                  class="far fa-user"
+                ></i>
               </button>{" "}
             </Link>
             <Link to="/game" style={{ textDecoration: "none" }}>
               <button
+                style={{
+                  color: "white",
+                  background: "#bd060f ",
+                  border: "2px solid black",
+                }}
                 onClick={GuestClick}
-                className={this.state.buttonClass}
-                onMouseOver={MouseOn}
-                onMouseLeave={MouseLeave}
+                className={this.state.buttonClass + " guest"}
               >
                 {" "}
-                <p style={{ marginLeft: "3.5rem" }}>Guest Play</p>
-                <img
-                  className="home-button-img"
-                  src={Guest}
-                  alt="guest-play"
-                ></img>{" "}
+                <p style={{ marginLeft: "3.5rem" }}>Guest Play</p>{" "}
+                <i
+                  style={{ fontSize: "3rem", color: "white" }}
+                  class="fas fa-sign-in-alt"
+                ></i>{" "}
               </button>
             </Link>
           </div>
