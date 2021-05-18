@@ -1,15 +1,18 @@
 .form-homepage {
-  background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+  /* background-image: linear-gradient(315deg, #000000 0%, #414141 74%); */
+  background: rgba(0, 0, 0, 0.8);
   height: 100vh;
   position: relative;
   display: flex;
-  align-items: center;
+  justify-content: center;
 }
 
 .form-container {
-  margin: 0 auto 0 auto;
+  margin-top: 7rem;
   border: 2px solid #ff7733;
   width: 50%;
+  height: 35rem;
+
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 20px;
   background-color: white;

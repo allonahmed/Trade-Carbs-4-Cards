@@ -15,7 +15,7 @@ import SignUpPage from "./Pages/SignUp/SignUpPage";
 import ChallengesPage from "./Pages/Challenges/ChallengesPage";
 import ContactPage from "./Pages/Contact/ContactPage";
 import Game from "./Pages/Game/Game";
-import Logo from "./Media/Logo.png";
+import Logo from "./Media/c4cbr.png";
 
 const Navigation = (props) => {
   const [click, setClicked] = useState(false); // for the dropdown buttons

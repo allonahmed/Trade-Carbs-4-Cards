@@ -410,6 +410,23 @@ input {
   margin: 0.5rem 0;
 }
 
+@media only screen and (max-height: 800px) {
+  .game-container {
+    height: 38rem;
+  }
+  .deck-spot {
+    height: 36rem;
+  }
+}
+
+@media only screen and (max-height: 905px) {
+  .game-container {
+    height: 40rem;
+  }
+  .deck-spot {
+    height: 38rem;
+  }
+}
 /* media queries  */
 @media only screen and (max-width: 750px) {
   /* .container {
