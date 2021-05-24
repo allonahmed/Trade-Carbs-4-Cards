@@ -1,47 +1,59 @@
 import React, { useState } from "react";
 import axios from "axios"; // handles requests
 import "./Merch.css";
+import Deku from "../../Media/avatars/deku.png";
+import Pain from "../../Media/avatars/pain.png";
+import Asuna from "../../Media/avatars/asuna.jpeg";
+import Goku from "../../Media/avatars/goku.png";
+import Naruto from "../../Media/avatars/naruto.png";
+import White from "../../Media/avatars/white.jpeg";
+import Killua from "../../Media/avatars/killua.png";
+import Flickity from "react-flickity-component";
 
 const MerchPage = () => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [blog, setBlog] = useState([]);
-
-  const HandleClick = () => {
-    if (name.length > 0 && comment.length > 0) {
-      axios
-        .post("http://localhost:3002/post-form", {
-          name: name,
-          comment: comment,
-        })
-        .then((res) => {
-          console.log("worked");
-        });
-    }
-  };
+  const imageArray = [Deku, Pain, Asuna, Goku, Naruto, Killua];
 
   return (
-    <div className="merch-text">
-      <div>
-        enter name:{" "}
-        <input
-          type="text"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
-      </div>
-      <div>
-        enter comments:
-        <input
-          type="text"
-          onChange={(e) => {
-            setComment(e.target.value);
-          }}
-        />
-      </div>
-      <button onClick={HandleClick}>submit</button>
-    </div>
+    <Flickity className="merch-text">
+      {imageArray.map((val, i) => {
+        return (
+          <div class="carousel-cell">
+            <button
+              onClick={(val) => {
+                this.DecodePicture(this.imageArray[i]);
+                this.setState((state) => ({
+                  picture: this.imageArray[i],
+                }));
+                axios
+                  .post("http://localhost:3002/update-avatar", {
+                    picture: this.imageArray[i],
+                    email: this.state.email,
+                  })
+                  .then((res) => {
+                    console.log(res.data);
+                  });
+                this.props.setPic();
+                window.location.reload();
+              }}
+            >
+              <img
+                // style={i === 3 ? { transform: "scale(1.3)" } : null}
+                // style={
+                //   1 === 4 ? { transform: "translateX(50px)" } : null
+                // }
+                className="img-to-pick"
+                src={val}
+                key={i}
+                alt="imagepicker"
+              />
+            </button>
+          </div>
+        );
+      })}
+    </Flickity>
   );
 };
 

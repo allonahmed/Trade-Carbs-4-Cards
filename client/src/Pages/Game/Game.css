@@ -30,13 +30,57 @@
 }
 
 /* draw card button */
+.time {
+  transform: translateY(0);
+  opacity: 1;
+  font-size: 35px;
+  animation: change 1s infinite linear;
+}
+.time-paused {
+  transform: translateY(0);
+  opacity: 1;
+  font-size: 35px;
+}
+
+@keyframes change {
+  0% {
+    transform: translatex(-50px) scale(0.3);
+    opacity: 0;
+  }
+  25% {
+    transform: translatex(0px) scale(1);
+    opacity: 1;
+  }
+  75% {
+    transform: translatex(0px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translatex(50px) scale(0.3);
+    opacity: 0;
+  }
+}
+.game-content {
+  height: 30vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.button-icons {
+  font-size: 32px;
+}
+.fa-play {
+  margin-left: 7px;
+}
 .draw-button {
   font-weight: 600;
   line-height: normal;
   cursor: pointer;
-
+  margin-right: 2rem;
+  margin-left: 2rem;
+  min-width: 10rem;
   display: block;
-  height: 4rem;
+  height: 4vh;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
@@ -131,7 +175,7 @@
   align-items: center;
   justify-content: center;
   /* margin-top: 4rem; */
-  height: 45rem;
+  height: 80vh;
   width: 100%;
   z-index: 0;
   overflow: hidden;
@@ -187,7 +231,7 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  height: 40rem;
+  height: 76vh;
   /* margin-top: 1vh; */
 }
 /* face down cards  */
@@ -196,28 +240,31 @@
   grid-column: 1/2;
   display: flex;
   justify-content: center;
+
   /* width: 70%; */
 }
 .face-down {
-  margin-top: 3rem;
+  margin-top: 3.4rem;
   position: absolute;
   height: 340px;
   width: 250px;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   font-size: 7rem;
   border-radius: 15px; /* think about how we will change this to reflect skins*/
   background: white;
   grid-column: 1/2;
   display: flex;
+  /* margin-left: 5rem; */
   justify-content: center;
+
   /* padding-left: 30rem; */
-  /* margin-right: 40rem; */
+  /* margin-right: 10rem; */
 }
 
 .two-decks {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 100%;
+  width: 80%;
   /* justify-content: center; */
   /* position: relative; */
 }
@@ -235,6 +282,7 @@
   width: 100%;
   /* margin-top: 1.5rem; */
   font-size: 1.8rem;
+  height: 76vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -263,9 +311,12 @@ input {
   height: 100%;
   width: 100%;
 }
-
+.prompt-div {
+  height: 8vh;
+  display: flex;
+  align-items: center;
+}
 .pregame-prompt {
-  margin-bottom: 2rem;
   color: white;
   text-shadow: 1px 1px #64b4ac;
   text-transform: uppercase;
@@ -273,10 +324,11 @@ input {
 
 .input-workout-div {
   width: 60%;
+  height: 60%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
-  margin: 2rem 0;
+
   /* height: 25rem; */
 }
 .input {
@@ -290,8 +342,8 @@ input {
 }
 .input-workout {
   width: 75%;
-  height: 3.2rem;
-  padding: 1rem 1rem;
+  height: 10vh;
+  padding: 1vh 1vh;
   margin: 1rem 0;
 
   /* background: linear-gradient(to top, #64b5ac 50%, #fde9e2 50%) bottom;
@@ -339,21 +391,29 @@ input {
 }
 .button-directions {
   display: flex;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   width: 100%;
   justify-content: center;
 
   /* margin-bottom: 0; */
 }
+
+.button-div {
+  height: 8vh;
+  display: flex;
+  align-items: center;
+}
 .next-button {
   width: 10rem;
-  /* margin-top: 1rem; */
-  margin-right: 2rem;
-  margin-bottom: 0;
+
+  margin-right: auto;
+  margin-left: auto;
   background-color: #000000;
   border: 3px solid rgba(0, 0, 0, 0.23);
   background: #fde9e2;
   color: black;
+  height: 6vh;
+  /* height: 8vh; */
 }
 .next {
   width: 12rem;
@@ -384,14 +444,14 @@ input {
 }
 .input-time-div {
   display: flex;
-  justify-content: space-around;
-  width: 80%;
+  justify-content: space-between;
+  width: 50%;
   color: white;
   /* height: 3.5rem; */
 }
 .input-time {
-  height: 3rem;
-  width: 30%;
+  height: 4rem;
+  width: 25%;
   transition: 0.5s ease-in;
   color: black;
 }
@@ -401,32 +461,110 @@ input {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 25rem;
+  height: 60%;
   animation: render 2s ease-in;
 }
 .time-intervals {
-  height: 3rem;
-  width: 80%;
+  height: 4rem;
+  width: 50%;
   margin: 0.5rem 0;
 }
-
-@media only screen and (max-height: 800px) {
-  .game-container {
-    height: 38rem;
-  }
-  .deck-spot {
-    height: 36rem;
-  }
+.start-workout-button:hover {
+  font-weight: 900;
 }
 
-@media only screen and (max-height: 905px) {
+/* @media only screen and (max-height: 700px) {
   .game-container {
-    height: 40rem;
+    height: 30rem;
+    background: white;
   }
   .deck-spot {
-    height: 38rem;
+    height: 28rem;
+  }
+  .workout-settings {
+    height: 28rem;
+  }
+}*/
+
+/* @media only screen and (max-height: 902px) {
+  .game-container {
+    height: 79vh;
+  }
+  .deck-spot {
+    height: 78vh;
   }
 }
+@media only screen and (max-height: 858px) {
+  .game-container {
+    height: 78vh;
+  }
+  .deck-spot {
+    height: 77vh;
+  }
+}
+@media only screen and (max-height: 820px) {
+  .game-container {
+    height: 77vh;
+  }
+  .deck-spot {
+    height: 76vh;
+  }
+}
+@media only screen and (max-height: 780px) {
+  .game-container {
+    height: 76vh;
+  }
+  .deck-spot {
+    height: 75vh;
+  }
+}
+@media only screen and (max-height: 742px) {
+  .game-container {
+    height: 75vh;
+  }
+  .deck-spot {
+    height: 74vh;
+  }
+}
+@media only screen and (max-height: 722px) {
+  .game-container {
+    height: 74vh;
+  }
+  .deck-spot {
+    height: 73vh;
+  }
+}
+@media only screen and (max-height: 687px) {
+  .game-container {
+    height: 73vh;
+  }
+  .deck-spot {
+    height: 72vh;
+  }
+}
+@media only screen and (max-height: 664px) {
+  .game-container {
+    height: 72vh;
+  }
+  .deck-spot {
+    height: 71vh;
+  }
+}
+@media only screen and (max-height: 634px) {
+  .game-container {
+    height: 71vh;
+  }
+}
+@media only screen and (max-height: 610px) {
+  .game-container {
+    height: 70vh;
+  }
+}
+@media only screen and (max-height: 590px) {
+  .game-container {
+    height: 69vh;
+  }
+} */
 /* media queries  */
 @media only screen and (max-width: 750px) {
   /* .container {
@@ -434,6 +572,9 @@ input {
   } */
   .card-list-spot {
     padding-right: 12rem;
+  }
+  .face-down-div {
+    padding-left: 12rem;
   }
   .home-button-div {
     margin-top: 0rem;
@@ -450,9 +591,7 @@ input {
     justify-content: center;
     animation: none;
   }
-  .pregame-prompt {
-    margin-bottom: 1rem;
-  }
+
   /* .next-button {
     margin-top: 1rem;
   } */
@@ -462,12 +601,13 @@ input {
     align-items: center;
     justify-content: space-between;
     width: 80%;
-    height: 28rem;
+    /* height: 28rem; */
 
     margin: 0 0;
   }
   .input-workout {
     margin: 1rem 1rem;
+    height: 6vh;
   }
   .face-down-div {
     display: none;
@@ -485,11 +625,13 @@ input {
 }
 
 @media only screen and (max-width: 840px) {
-  .input-div {
-    padding-bottom: 2rem;
-  }
   h4 {
     font-size: 1.4rem;
+  }
+}
+@media only screen and (max-width: 1300px) {
+  .two-decks {
+    width: 100%;
   }
 }
 

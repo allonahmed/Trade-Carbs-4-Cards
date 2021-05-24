@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Home.css";
 import "../../App.css";
 import { Component } from "react";
@@ -10,6 +10,7 @@ import Card from "../../Components/Card/Card";
 import Deck from "../../Components/Deck/Deck";
 import { randomNumber } from "../../helpers";
 import { AnimateKeyframes } from "react-simple-animate";
+import axios from "axios";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -21,11 +22,33 @@ export default class HomePage extends Component {
       buttonClass: "home-button", // to manage the button classlist
       containerClass: "home-container", // to manage the button classlist
       buttonMouseOver: false, // handles what to do when hovering over the buttons
-      myDeck: deck.deck,
+      // myDeck: deck.deck,
+      loginStatus: false,
+      name: "",
+      level: "",
     };
   }
 
+  componentWillMount() {
+    axios.get("http://localhost:3002/login").then((response) => {
+      if (response.data.loggedIn == true) {
+        this.setState((state) => ({
+          loginStatus: this.props.login,
+          name: response.data.user[0].firstname,
+          level: response.data.user[0].level,
+        }));
+      }
+    });
+  }
+
   render() {
+    // useEffect(() => {
+    //   this.setState((state) => ({
+    //     loginStatus: false,
+    //   }));
+    // }, [this.state.loginStatus]);
+    const deck = new Deck();
+    const myDeck = deck.deck;
     const GuestClick = () => {
       // for info purposes
       return (this.setState = (state) => ({
@@ -50,7 +73,7 @@ export default class HomePage extends Component {
 
     const styleFloat = (data) => {
       let x = randomNumber(-200, 90, 1);
-      let y = randomNumber(-10, 100, 1);
+      let y = randomNumber(-10, 65, 1);
       let rx = randomNumber(-5, 5, 1);
 
       let style = {
@@ -58,25 +81,7 @@ export default class HomePage extends Component {
         marginTop: `${y}vh`,
         color: "black",
       };
-      console.log("data", data);
-      if (data) {
-        if (data[data.length - 1] === "♦" || data[data.length - 1] === "♥") {
-          style.color = "red";
-        }
-      }
-      return style;
-    };
-    const styleFloat1 = (data) => {
-      let x = randomNumber(-30, 90, 1);
-      let y = randomNumber(-100, 50, 1);
-      let rx = randomNumber(-5, 5, 1);
-
-      let style = {
-        marginLeft: `${x}%`,
-        marginTop: `${y}px`,
-        color: "black",
-      };
-      console.log("data", data);
+      // console.log("data", data);
       if (data) {
         if (data[data.length - 1] === "♦" || data[data.length - 1] === "♥") {
           style.color = "red";
@@ -87,7 +92,7 @@ export default class HomePage extends Component {
 
     return (
       <div class="container">
-        {this.state.myDeck.map((val, i) => {
+        {myDeck.map((val, i) => {
           if (i % 2 === 0) {
             return (
               <AnimateKeyframes
@@ -103,10 +108,10 @@ export default class HomePage extends Component {
                 <div
                   key={i}
                   className="floating-card-div "
-                  style={styleFloat(this.state.myDeck[i])}
-                  data-value={this.state.myDeck[i]}
+                  style={styleFloat(myDeck[i])}
+                  data-value={myDeck[i]}
                 >
-                  {this.state.myDeck[i][this.state.myDeck[i].length - 1]}
+                  {myDeck[i][myDeck[i].length - 1]}
                 </div>
               </AnimateKeyframes>
             );
@@ -125,10 +130,10 @@ export default class HomePage extends Component {
                 <div
                   key={i}
                   className="floating-card-div "
-                  style={styleFloat(this.state.myDeck[i])}
-                  data-value={this.state.myDeck[i]}
+                  style={styleFloat(myDeck[i])}
+                  data-value={myDeck[i]}
                 >
-                  {this.state.myDeck[i][this.state.myDeck[i].length - 1]}
+                  {myDeck[i][myDeck[i].length - 1]}
                 </div>
               </AnimateKeyframes>
             );
@@ -146,45 +151,67 @@ export default class HomePage extends Component {
             <span className="innerText text">Trade Carbs 4 Cards</span>
             <span className={this.state.classInnerText}>Play Now</span>
           </div>
-          <div className="home-button-div">
-            <div className="icon-div"></div>
-            <Link to="/login" style={{ textDecoration: "none" }}>
-              {" "}
-              <button
-                className={`${this.state.buttonClass} +  login`}
-                style={{
-                  background: "white",
-                  color: "black",
-                  border: "2px solid black",
-                }}
-              >
+          {this.state.loginStatus ? (
+            <div className="home-button-div">
+              <Link to="/game" style={{ textDecoration: "none" }}>
+                <button
+                  style={{
+                    color: "white",
+                    background: "#bd060f ",
+                    border: "2px solid black",
+                  }}
+                  onClick={GuestClick}
+                  className={this.state.buttonClass + " guest"}
+                >
+                  {" "}
+                  <p style={{ marginLeft: "3.5rem" }}>Play Now</p>{" "}
+                  <i
+                    style={{ fontSize: "3rem", color: "white" }}
+                    class="fas fa-sign-in-alt"
+                  ></i>{" "}
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <div className="home-button-div">
+              <Link to="/login" style={{ textDecoration: "none" }}>
                 {" "}
-                <p style={{ marginLeft: "4.7rem" }}>Log In </p>{" "}
-                <i
-                  style={{ fontSize: "2.8rem", color: "black" }}
-                  class="far fa-user"
-                ></i>
-              </button>{" "}
-            </Link>
-            <Link to="/game" style={{ textDecoration: "none" }}>
-              <button
-                style={{
-                  color: "white",
-                  background: "#bd060f ",
-                  border: "2px solid black",
-                }}
-                onClick={GuestClick}
-                className={this.state.buttonClass + " guest"}
-              >
-                {" "}
-                <p style={{ marginLeft: "3.5rem" }}>Guest Play</p>{" "}
-                <i
-                  style={{ fontSize: "3rem", color: "white" }}
-                  class="fas fa-sign-in-alt"
-                ></i>{" "}
-              </button>
-            </Link>
-          </div>
+                <button
+                  className={`${this.state.buttonClass} +  login`}
+                  style={{
+                    background: "white",
+                    color: "black",
+                    border: "2px solid black",
+                  }}
+                >
+                  {" "}
+                  <p style={{ marginLeft: "4.7rem" }}>Log In </p>{" "}
+                  <i
+                    style={{ fontSize: "2.8rem", color: "black" }}
+                    class="far fa-user"
+                  ></i>
+                </button>{" "}
+              </Link>
+              <Link to="/game" style={{ textDecoration: "none" }}>
+                <button
+                  style={{
+                    color: "white",
+                    background: "#bd060f ",
+                    border: "2px solid black",
+                  }}
+                  onClick={GuestClick}
+                  className={this.state.buttonClass + " guest"}
+                >
+                  {" "}
+                  <p style={{ marginLeft: "3.5rem" }}>Guest Play</p>{" "}
+                  <i
+                    style={{ fontSize: "3rem", color: "white" }}
+                    class="fas fa-sign-in-alt"
+                  ></i>{" "}
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "../../App.css";
 import "./Game.css";
 import { Component } from "react";
@@ -6,6 +6,14 @@ import Card from "../../Components/Card/Card";
 import Deck from "../../Components/Deck/Deck";
 import FaceDown from "../../Components/Card/FaceDown";
 import SignUpPage from "../SignUp/SignUpPage";
+import Squats from "../../Media/workout-icons/squats.png";
+import Planks from "../../Media/workout-icons/planks.png";
+import Pushups from "../../Media/workout-icons/pushups.png";
+import Situps from "../../Media/workout-icons/situps.jpeg";
+import Jumping from "../../Media/workout-icons/jumping.png";
+import ReactDOM from "react-dom";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import axios from "axios";
 
 export default class Game extends Component {
   constructor(props) {
@@ -22,21 +30,33 @@ export default class Game extends Component {
       shuffled: deck1.shuffle(deck1.deck), //shuffled array of the deck
       gameContainerClass: "game-container",
       timed: false,
-      selectedTime: "",
+      selectedTime: "untimed",
       selectedExercise: "",
       styleTimedButton: { height: "10rem", color: "black" },
       styleUntimedButton: {
         background: "#fde9e2",
+        border: "3px solid rgba(255, 0, 0)",
         height: "10rem",
         color: "black",
       },
       enhance: false,
       selectedInterval: "",
-      countDown: "false",
+      countDown: "",
       userInfoClass: "user-info",
       question1: false, // if false, show question of exersize, else go to question2
       question2: false, // if false, show question of time, else set play to true
       play: false,
+      timerOn: false,
+      startWorkout: false,
+      pause: true,
+      timerHover: false,
+      firstname: "",
+      lastname: "",
+      level: "",
+      exp: "",
+      email: "",
+      startTime: "",
+      totalTime: "",
     };
     this.drawNewCard = this.drawNewCard.bind(this);
   }
@@ -50,15 +70,48 @@ export default class Game extends Component {
       cards: [...prevState.cards.slice(0, -1)],
     }));
   }
+  componentDidMount() {
+    axios.get("http://localhost:3002/login").then((response) => {
+      if (response.data.loggedIn == true) {
+        this.setState((state) => ({
+          firstname: response.data.user[0].firstname,
+          lastname: response.data.user[0].lastname,
+          level: response.data.user[0].level,
+          exp: response.data.user[0].exp,
+          // picture: response.data.user[0].picture,
+          // cardback: response.data.user[0].cardback,
+          // bio: response.data.user[0].bio,
+          email: response.data.user[0].email,
+        }));
+      }
+      console.log(response.data.user);
+    });
+  }
   intervalChange = (e) => {
     e.preventDefault();
     this.setState({
       selectedInterval: e.target.value,
     });
   };
+
   render() {
+    let startTime;
+    const start = () => {
+      startTime = performance.now();
+    };
     const HandleClick = () => {
       // decriments the count after each click
+      if (this.state.count === 51) {
+        start();
+      } else {
+        var endTime = performance.now();
+        var difference = endTime - startTime;
+        difference /= 1000;
+        this.setState((state) => ({
+          totalTime: this.state.totalTime + difference,
+        }));
+        startTime = performance.now();
+      }
       this.setState((state) => ({
         card: (state.card = state.cards[state.count - 1]), // sets the current card to the last element in the shuffled cards deck
         count: state.count - 1, // decriments the count for ux and to keep moving through the cards deck
@@ -99,6 +152,7 @@ export default class Game extends Component {
     const UnTimedClick = () => {
       this.setState((state) => ({
         timed: false,
+        selectedInterval: "",
         styleTimedButton: {
           border: "3px solid rgba(0, 0, 0, 0.5)",
 
@@ -141,6 +195,94 @@ export default class Game extends Component {
 
       return style;
     };
+    const convert = (data) => {
+      let output;
+      if (data === "Q") {
+        output = 11;
+      } else if (data === "K") {
+        output = 12;
+      } else if (data === "A" || data === "J") {
+        output = 13;
+      } else {
+        output = data;
+      }
+      return output;
+    };
+    const Img = () => {
+      const c = convert(this.state.card[0]);
+      if (this.state.selectedExercise === "Push-ups") {
+        return (
+          <div>
+            <img
+              style={{ height: "100px", width: "100px" }}
+              src={Pushups}
+              alt="squats"
+            />
+            <p style={{ color: "black" }}>
+              {this.state.card.length === 3 ? 10 : c}{" "}
+              {this.state.selectedExercise}
+            </p>
+          </div>
+        );
+      } else if (this.state.selectedExercise === "Sit-ups") {
+        return (
+          <div>
+            <img
+              style={{ height: "100px", width: "100px" }}
+              src={Situps}
+              alt="situps"
+            />
+            <p style={{ color: "black" }}>
+              {this.state.card.length === 3 ? 10 : c}{" "}
+              {this.state.selectedExercise}
+            </p>
+          </div>
+        );
+      } else if (this.state.selectedExercise === "Planks") {
+        return (
+          <div>
+            <img
+              style={{ height: "100px", width: "100px" }}
+              src={Planks}
+              alt="planks"
+            />
+            <p style={{ color: "black" }}>
+              {this.state.card.length === 3 ? 10 : c}{" "}
+              {this.state.selectedExercise}
+            </p>
+          </div>
+        );
+      } else if (this.state.selectedExercise === "Jumping Jacks") {
+        return (
+          <div>
+            <img
+              style={{ height: "100px", width: "100px" }}
+              src={Jumping}
+              alt="jumping jacks"
+            />
+            <p style={{ color: "black" }}>
+              {this.state.card.length === 3 ? 10 : c}{" "}
+              {this.state.selectedExercise}
+            </p>
+          </div>
+        );
+      }
+      if (this.state.selectedExercise === "Squats") {
+        return (
+          <div>
+            <img
+              style={{ height: "100px", width: "100px" }}
+              src={Squats}
+              alt="squats"
+            />
+            <p style={{ color: "black" }}>
+              {this.state.card.length === 3 ? 10 : c}{" "}
+              {this.state.selectedExercise}
+            </p>
+          </div>
+        );
+      }
+    };
 
     const cardList = this.state.drawnCards.map(
       (
@@ -150,26 +292,125 @@ export default class Game extends Component {
         <Card
           key={index} //error handling
           cardData={cardV}
-          symbol={cardV.length === 2 ? cardV[1] : cardV[2]}
+          // symbol={cardV.length === 2 ? cardV[1] : cardV[2]}
+          symbol={Img()}
           suit={cardV[cardV.length - 1]}
           value={cardV.length === 3 ? 10 : cardV[0]}
         />
       )
     );
     const faceDown = this.state.cards.map((val, i) => (
-      <FaceDown classs="face-down" key={i} />
+      <FaceDown classs="face-down" count={i} key={i} />
     ));
-    console.log(this.state.cards.length);
+    console.log(
+      "startTime:",
+      typeof this.state.startTime,
+      "  totaltime:",
+      this.state.totalTime
+    );
+    const nextDisable = () => {
+      if (this.state.timed) {
+        if (this.state.selectedInterval.length === 0) {
+          return "disabled";
+        }
+      }
+      return;
+    };
+    const RenderTime = ({ remainingTime }) => {
+      if (!this.state.startWorkout) {
+        return (
+          <button
+            className="start-workout-button"
+            style={{
+              color: "white",
+              background: "transparent",
+              height: "90%",
+              width: "90%",
+              borderRadius: "50%",
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              border: "none",
+            }}
+            onClick={() => {
+              this.setState((state) => ({ startWorkout: true, pause: true }));
+              HandleClick();
+            }}
+          >
+            <p>START WORKOUT</p>
+            <i class="fas fa-play "></i>
+          </button>
+        );
+      } else
+        return (
+          <button
+            onMouseEnter={() => {
+              this.setState((state) => ({ timerHover: true }));
+            }}
+            onMouseLeave={() => {
+              this.setState((state) => ({ timerHover: false }));
+            }}
+            onClick={() => {
+              this.setState((state) => ({
+                pause: !this.state.pause,
+                startWorkout: true,
+              }));
+            }}
+            style={{
+              color: "white",
+              background: "transparent",
+              height: "90%",
+              width: "90%",
+              // position: "relative",
+              borderRadius: "50%",
 
+              // display: "flex",
+              // flexDirection: "column",
+              // justifyContent: "center",
+              // alignItems: "center",
+              border: "none",
+            }}
+          >
+            {this.state.timerHover === false ? (
+              <div
+                className={!this.state.pause ? "time-paused" : "time"}
+                style={remainingTime === 0 ? { fontSize: "24px" } : null}
+              >
+                {remainingTime === 0 ? "NEXT CARD" : remainingTime + 1}
+              </div>
+            ) : (
+              <div>
+                {" "}
+                {this.state.pause ? (
+                  <i class="fas fa-pause button-icons"></i>
+                ) : (
+                  <i class="fas fa-play button-icons"></i>
+                )}
+              </div>
+            )}
+          </button>
+        );
+    };
+
+    const sendData = () => {
+      if (this.state.timed)
+        axios.post("http://localhost:3002/post-workout", {
+          email: this.state.email,
+          timed: this.state.selectedTime,
+          interval: this.state.selectedInterval,
+          time: this.state.selectedInterval * 52,
+          workout: this.state.selectedExercise,
+          reps: 412,
+        });
+      else {
+      }
+    };
     return (
       <div className="container">
-        <div
-          className="game-container"
-          style={this.state.enhance ? { width: "100%", height: "100vh" } : null}
-        >
-          {/* <button onClick={() => this.setState((state) => ({ enhance: true }))}>
-            enhance
-          </button> */}
+        <div className="game-container">
+          {this.state.count === 0 ? sendData() : null}
           <div className="deck-spot">
             {this.state.play === true ? ( // only renders the cardList if the count is under 52, which will occur when you click the button after the first time
               <div className="two-decks">
@@ -179,7 +420,9 @@ export default class Game extends Component {
             ) : this.state.question1 === false ? (
               <div className="pre-game">
                 <div className="workout-settings">
-                  <h3 className="pregame-prompt">Select a workout: </h3>
+                  <div className="prompt-div">
+                    <h3 className="pregame-prompt">Select a workout: </h3>
+                  </div>
                   <div className="input-workout-div">
                     <button
                       className="input input-workout left"
@@ -248,19 +491,21 @@ export default class Game extends Component {
                       Mixed
                     </button>
                   </div>
-                  <button
-                    className="draw-button next-button"
-                    disabled={
-                      this.state.selectedExercise === "" ? "disabled" : null
-                    }
-                    onClick={() => {
-                      this.setState((state) => ({
-                        question1: true,
-                      }));
-                    }}
-                  >
-                    NEXT <i className="fas fa-arrow-alt-circle-right"></i>
-                  </button>
+                  <div className="button-div">
+                    <button
+                      className="draw-button next-button"
+                      disabled={
+                        this.state.selectedExercise === "" ? "disabled" : null
+                      }
+                      onClick={() => {
+                        this.setState((state) => ({
+                          question1: true,
+                        }));
+                      }}
+                    >
+                      NEXT <i className="fas fa-arrow-alt-circle-right"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             ) : (
@@ -299,16 +544,60 @@ export default class Game extends Component {
                 </div>
                 {this.state.timed ? (
                   <div className="timed-options">
-                    <button className="input time-intervals left">
+                    <button
+                      onClick={() => {
+                        this.setState((state) => ({ selectedInterval: "120" }));
+                      }}
+                      style={
+                        this.state.selectedInterval === "120"
+                          ? { border: "3px solid rgba(255, 0, 0)" }
+                          : { border: "3px solid rgba(0, 0, 0, 0.6)" }
+                      }
+                      className="input time-intervals left"
+                    >
                       EASY: 120sec
                     </button>
-                    <button className="input time-intervals right">
+                    <button
+                      onClick={() => {
+                        this.setState((state) => ({ selectedInterval: "90" }));
+                      }}
+                      style={
+                        this.state.selectedInterval === "90"
+                          ? { border: "3px solid rgba(255, 0, 0)" }
+                          : { border: "3px solid rgba(0, 0, 0, 0.6)" }
+                      }
+                      className="input time-intervals right"
+                    >
                       MODERATE: 90sec
                     </button>
-                    <button className="input time-intervals left">
+                    <button
+                      onClick={() => {
+                        this.setState((state) => ({ selectedInterval: "60" }));
+                      }}
+                      style={
+                        this.state.selectedInterval === "60"
+                          ? {
+                              border: "3px solid rgba(255, 0, 0)",
+                            }
+                          : {
+                              border: "3px solid rgba(0, 0, 0, 0.6)",
+                            }
+                      }
+                      className="input time-intervals left"
+                    >
                       HARD: 60sec
                     </button>
-                    <button className="input time-intervals right">
+                    <button
+                      onClick={() => {
+                        this.setState((state) => ({ selectedInterval: "30" }));
+                      }}
+                      style={
+                        this.state.selectedInterval === "30"
+                          ? { border: "3px solid rgba(255, 0, 0)" }
+                          : { border: "3px solid rgba(0, 0, 0, 0.6)" }
+                      }
+                      className="input time-intervals right"
+                    >
                       BEAST: 30sec
                     </button>
                   </div>
@@ -323,6 +612,11 @@ export default class Game extends Component {
                     <i class="fas fa-arrow-alt-circle-left"></i> BACK
                   </button>
                   <button
+                    disabled={
+                      this.state.timed && this.state.selectedInterval === ""
+                        ? "disabled"
+                        : null
+                    }
                     className=" draw-button next-button next"
                     onClick={() => {
                       this.setState((state) => ({ play: true }));
@@ -334,14 +628,47 @@ export default class Game extends Component {
               </div>
             )}
           </div>
-          <button
-            className="draw-button"
-            style={this.state.play ? null : { display: "none" }}
-            onClick={HandleClick}
-          >
-            {" "}
-            {ButtonText()}
-          </button>
+          <div className="game-content">
+            {this.state.play ? (
+              !this.state.timed ? (
+                <button
+                  className="draw-button"
+                  style={
+                    this.state.play && !this.state.timed
+                      ? null
+                      : { display: "none" }
+                  }
+                  onClick={HandleClick}
+                >
+                  {" "}
+                  {ButtonText()}
+                </button>
+              ) : (
+                <CountdownCircleTimer
+                  isPlaying={this.state.startWorkout && this.state.pause}
+                  duration={this.state.selectedInterval - 1}
+                  onComplete={() => {
+                    HandleClick();
+                    while (
+                      this.state.cards.length != 0
+                      // this.state.startWorkout === true
+                    ) {
+                      return [true, 1000];
+                    }
+                    return false;
+                  }}
+                  size={140}
+                  colors={[
+                    ["#fff", 0.33],
+                    ["#F57F65", 0.33],
+                    ["#DA3B19", 0.33],
+                  ]}
+                >
+                  <RenderTime />
+                </CountdownCircleTimer>
+              )
+            ) : null}
+          </div>
         </div>
         <div className={this.state.userInfoClass}>
           <button className="user-info-button" onClick={userInfoClick}>
