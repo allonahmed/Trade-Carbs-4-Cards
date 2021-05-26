@@ -163,7 +163,7 @@ class UserProfile extends React.Component {
             <div className="img-div">
               <img
                 className="avatar"
-                src={this.state.picture}
+                src={this.state.picture==='default' ? White : this.state.picture}
                 alt="user profile picture"
               />
               <button

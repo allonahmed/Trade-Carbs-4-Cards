@@ -1,0 +1,20 @@
+#contact-homepage {
+    display: flex;
+    justify-content: center;
+}
+
+.contact-form-container {
+    margin: 10px 0;
+}
+
+#message-textarea {
+    width: 100%;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px;
+    border: 2px solid gray;
+}
+
+#message-textarea:focus {
+    border: 2px solid #f42c04;
+    box-shadow: 0 0 5px gray;
+}

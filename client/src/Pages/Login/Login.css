@@ -7,15 +7,23 @@
   justify-content: center;
 }
 
+.sign-in-form-container {
+  height: 55%;
+}
+
+.sign-up-form-container {
+  height: 100%;
+}
+
 .form-container {
   margin-top: 7rem;
-  border: 2px solid #ff7733;
+  border: 2px solid #f42c04;
   width: 50%;
-  height: 35rem;
+  /* height: 100%; */
 
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 20px;
-  background-color: white;
+  background-color: rgb(241, 241, 241);
   /* position: relative;
     display: flex;
     align-items: center; */
@@ -28,7 +36,7 @@
 
 .form-header {
   text-align: center;
-  color: #64b5ac;
+  color: red;
   font-weight: 400;
   font-size: 30px;
   margin: 10px;
@@ -51,34 +59,36 @@
   margin-bottom: 5px;
 }
 
-.form-field input[type]:not([type="submit"]) {
-  width: calc(100% - 20px);
+.form-field input[type]:not([id="form-button"]) {
+  /* width: calc(100% - 20px); */
+  width: 100%;
   padding: 10px;
-  font-size: 16px;
+  /* font-size: 16px; */
   border-radius: 5px;
   border: 2px solid gray;
 }
 
-.form-field input[type]:not([type="submit"]):focus {
-  border: 2px solid #64b5ac;
+.form-field input[type]:not([type="form-button"]):focus {
+  border: 2px solid #f42c04;
   box-shadow: 0 0 5px gray;
 }
 
-.form-field input[type="submit"] {
+.form-button {
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
-  border: 1px solid #64b5ac;
-  background-color: #64b5ac;
+  border: 1px solid #f42c04;
+  background-color: #f42c04;
+  color: white;
 }
 
-.form-field input[type="submit"]:hover {
-  background-color: #59a098;
+.form-button:hover {
+  background-color: #f14725;
   cursor: pointer;
 }
 
-.form-field input[type="submit"]:active {
-  box-shadow: 0 0 5px #64b5ac;
+.form-button:active {
+  box-shadow: 0 0 5px #f42c04;
 }
 
 #signup-link {
@@ -87,19 +97,19 @@
 }
 
 #signup-link:link {
-  color: #64b5ac;
+  color: #f42c04;
 }
 
 #signup-link:visited {
-  color: #64b5ac;
+  color: #f42c04;
 }
 
 #signup-link:hover {
-  color: #457c76;
+  color: #f14725;
 }
 
 #signup-link:active {
-  color: #325a55;
+  color: #d42705;
 }
 
 .signup-p {

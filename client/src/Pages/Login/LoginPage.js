@@ -36,7 +36,7 @@ const LoginPage = (props) => {
 
   return (
     <div className="form-homepage">
-      <div className="form-container">
+      <div className="form-container sign-in-form-container">
         <h1 className="form-header">Sign Into Carbs4Cards</h1>
         <h4>{errorMessage.length > 0 ? errorMessage : null}</h4>
         <form id="login-form">
@@ -69,7 +69,7 @@ const LoginPage = (props) => {
           </div>
 
           <div className="form-field">
-            <button onClick={Submit}>Log In</button>
+            <button className="form-button" onClick={Submit}>Log In</button>
             {errorMessage === "worked!" ? <Redirect to="/" /> : null}
             <a href="./signup" target="_self" id="signup-link">
               Sign up here!

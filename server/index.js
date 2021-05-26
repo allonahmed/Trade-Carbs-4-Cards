@@ -35,7 +35,7 @@ app.use(
 var db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "password",
+  password: "saw password",
   database: "saw",
   port: "3306",
 });
@@ -65,7 +65,7 @@ app.post("/signup", (req, res) => {
         info.email,
         hash,
         0,
-        100,
+        0,
         "default",
         "default",
         `${info.firstName}'s bio`,
@@ -178,6 +178,47 @@ app.get("/get-data", (req, res) => {
     res.send({ loggedIn: false });
   }
 });
+
+app.get("/posts", (req,res) => {
+  const query = "SELECT * FROM saw.posts";
+  db.query(query,       
+    (err, result) => {
+    if (err) console.log(err);
+    else {
+      res.send(result);
+    }
+  });
+  
+})
+
+app.post("/posts", (req, res) => {
+  const info = {
+    content: req.body.content,
+    post_date: req.body.post_date,
+    email: req.body.email,
+    first_name: req.session.user[0].firstname,
+    last_name: req.session.user[0].lastname,
+    level: req.session.user[0].level
+  };
+  console.log("INDEX.JS", info);
+    const query =
+      "INSERT INTO saw.posts (content, post_date, email, first_name, last_name, level) VALUES (?,?,?,?,?,?)";
+    db.query(
+      query,
+      [
+        info.content,
+        info.post_date,
+        info.email,
+        info.first_name,
+        info.last_name,
+        info.level
+      ],
+      (err, result) => {
+        if (err) console.log(err);
+        else console.log(result);
+      }
+    );
+  });
 
 app.listen(3002, () => {
   console.log("my server is running on port 3002");
