@@ -221,7 +221,7 @@ class UserProfile extends React.Component {
       this.state.totaljj
     );
     if (max === 0) {
-      return null;
+      return Pushups;
     } else if (max === this.state.totalpushups) {
       return Pushups;
     } else if (max === this.state.totalsitups) {

@@ -8,6 +8,7 @@ import FaceDown from "../../Components/Card/FaceDown";
 import SignUpPage from "../SignUp/SignUpPage";
 import Squats from "../../Media/workout-icons/squats.png";
 import Planks from "../../Media/workout-icons/planks.png";
+import Dips from "../../Media/icons/dips.png";
 import Pushups from "../../Media/workout-icons/pushups.png";
 import Situps from "../../Media/workout-icons/situps.jpeg";
 import Jumping from "../../Media/workout-icons/jumping.png";
@@ -33,12 +34,11 @@ export default class Game extends Component {
       timed: false,
       selectedTime: "untimed",
       selectedExercise: "",
-      styleTimedButton: { height: "10rem", color: "black" },
+      styleTimedButton: { height: "10rem", color: "white" },
       styleUntimedButton: {
-        background: "#fde9e2",
         border: "3px solid rgba(255, 0, 0)",
         height: "10rem",
-        color: "black",
+        color: "white",
       },
       enhance: false,
       selectedInterval: 0,
@@ -159,8 +159,7 @@ export default class Game extends Component {
       this.setState((state) => ({
         timed: true,
         styleTimedButton: {
-          background: "#fde9e2",
-          color: "black",
+          color: "white",
           border: "3px solid rgba(255, 0, 0)",
         },
         styleUntimedButton: {
@@ -180,7 +179,7 @@ export default class Game extends Component {
         styleUntimedButton: {
           border: "3px solid rgba(255, 0, 0)",
           height: "10rem",
-          color: "black",
+          color: "white",
         },
       }));
     };
@@ -203,12 +202,12 @@ export default class Game extends Component {
       ) {
         style = {
           textDecoration: "none",
-          color: "black",
+          color: "white",
         };
       }
       if (this.state.selectedExercise === ex) {
-        style.color = "black";
-        style.background = "#fde9e2";
+        style.color = "white";
+        // style.background = "#fde9e2";
         style.border = "3px solid rgba(255, 0, 0)";
       }
 
@@ -237,7 +236,7 @@ export default class Game extends Component {
               src={Pushups}
               alt="squats"
             />
-            <p style={{ color: "black" }}>
+            <p style={{ color: "white" }}>
               {this.state.card.length === 3 ? 10 : c}{" "}
               {this.state.selectedExercise}
             </p>
@@ -251,21 +250,21 @@ export default class Game extends Component {
               src={Situps}
               alt="situps"
             />
-            <p style={{ color: "black" }}>
+            <p style={{ color: "white" }}>
               {this.state.card.length === 3 ? 10 : c}{" "}
               {this.state.selectedExercise}
             </p>
           </div>
         );
-      } else if (this.state.selectedExercise === "Planks") {
+      } else if (this.state.selectedExercise === "Dips") {
         return (
           <div>
             <img
               style={{ height: "100px", width: "100px" }}
-              src={Planks}
+              src={Dips}
               alt="planks"
             />
-            <p style={{ color: "black" }}>
+            <p style={{ color: "white" }}>
               {this.state.card.length === 3 ? 10 : c}{" "}
               {this.state.selectedExercise}
             </p>
@@ -279,7 +278,7 @@ export default class Game extends Component {
               src={Jumping}
               alt="jumping jacks"
             />
-            <p style={{ color: "black" }}>
+            <p style={{ color: "white" }}>
               {this.state.card.length === 3 ? 10 : c}{" "}
               {this.state.selectedExercise}
             </p>
@@ -294,7 +293,7 @@ export default class Game extends Component {
               src={Squats}
               alt="squats"
             />
-            <p style={{ color: "black" }}>
+            <p style={{ color: "white" }}>
               {this.state.card.length === 3 ? 10 : c}{" "}
               {this.state.selectedExercise}
             </p>
@@ -510,14 +509,14 @@ export default class Game extends Component {
                     </button>
                     <button
                       className="input input-workout right"
-                      style={nonChooseStyle("Planks")}
+                      style={nonChooseStyle("Dips")}
                       onClick={() => {
                         this.setState((state) => ({
-                          selectedExercise: "Planks",
+                          selectedExercise: "Dips",
                         }));
                       }}
                     >
-                      Planks
+                      Dips
                     </button>
                     <button
                       className="input input-workout left"
@@ -721,17 +720,6 @@ export default class Game extends Component {
               )
             ) : null}
           </div>
-        </div>
-        <div className={this.state.userInfoClass}>
-          <button className="user-info-button" onClick={userInfoClick}>
-            {" "}
-            👈{" "}
-          </button>
-          <p className="user-info-text">
-            {this.state.userInfoClass === "user-info-small"
-              ? "Click for user information"
-              : "your card is" + this.state.card}
-          </p>
         </div>
       </div>
     );

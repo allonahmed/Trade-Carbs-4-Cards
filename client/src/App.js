@@ -11,9 +11,10 @@ import {
 // import { useUser } from "./context/auth";
 // import AuthenticatedApp from "./authenticated-app";
 // import UnauthenticatedApp from "./unauthenticated-app";
+import PostPage from "./Pages/Blog/Post"; // NEW
 import HomePage from "./Pages/Home/HomePage";
 import AboutUs from "./Pages/AboutUs/AboutUsPage";
-import MerchPage from "./Pages/Merch/MerchPage";
+import BlogPage from "./Pages/Blog/BlogPage";
 import LoginPage from "./Pages/Login/LoginPage";
 import SignUpPage from "./Pages/SignUp/SignUpPage";
 import ChallengesPage from "./Pages/Challenges/ChallengesPage";
@@ -176,9 +177,9 @@ const Navigation = (props) => {
             }}
             className="nav-link"
             exact
-            to="/merch"
+            to="/blog"
           >
-            Merch
+            Blog
           </NavLink>
         </li>
         {props.loginStatus ? (
@@ -304,7 +305,8 @@ class App extends React.Component {
               }}
             />
             <Route path="/signup" component={SignUpPage}></Route>
-            <Route path="/merch" component={MerchPage}></Route>
+            <Route path="/post" component={PostPage}></Route>
+            <Route path="/blog" component={BlogPage}></Route>
             <Route path="/about-us" component={AboutUs}></Route>
             <Route path="/contacts" component={ContactPage}></Route>
             <Route path="/challenges" component={ChallengesPage}></Route>

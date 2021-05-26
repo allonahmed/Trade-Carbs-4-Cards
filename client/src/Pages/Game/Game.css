@@ -85,14 +85,15 @@
   text-decoration: none;
   text-transform: uppercase;
   padding: 1.5rem 1rem 2.9rem;
-  background-color: #fde9e2;
-  color: #000;
+  background-color: #fff;
+  color: #fff;
   border: 0.15rem solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   margin-bottom: 2rem;
   transition: all 0.5s ease;
   overflow: hidden;
   position: relative;
+  background-image: linear-gradient(180deg, #040607 20%, #c3c8ca 190%);
 }
 .draw-button:after {
   content: "";
@@ -218,7 +219,7 @@
   background-color: #000000;
   background-color: #000000;
   background-color: #000000;
-  background-image: linear-gradient(147deg, #000000 0%, #171818 74%);
+  background-image: linear-gradient(180deg, #040607 20%, #c3c8ca 150%);
 
   /* background-image: linear-gradient(315deg, #000000 0%, #181717 74%); */
   /* border-radius: 50px; */
@@ -231,7 +232,7 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  height: 76vh;
+  height: 78vh;
   /* margin-top: 1vh; */
 }
 /* face down cards  */
@@ -263,6 +264,7 @@
 
 .two-decks {
   display: grid;
+  margin-top: 70px;
   grid-template-columns: 1fr 1fr;
   width: 80%;
   /* justify-content: center; */
@@ -336,9 +338,9 @@ input {
   align-items: center;
   justify-content: center;
   border-radius: 15px;
-  border: 3px solid rgba(0, 0, 0, 0.6);
-  background-color: #fde9e2;
-  color: black;
+  border: 3px double rgba(255, 247, 247, 0.2);
+  background-image: linear-gradient(360deg, #040607 20%, #c3c8ca 190%);
+  color: white;
 }
 .input-workout {
   width: 75%;
@@ -351,7 +353,6 @@ input {
   transition: 0.5s ease-out; */
 }
 .input:hover {
-  color: black;
   background-position: bottom;
   text-decoration: none;
 }
@@ -409,9 +410,10 @@ input {
   margin-right: auto;
   margin-left: auto;
   background-color: #000000;
+  background-image: linear-gradient(180deg, #040607 20%, #c3c8ca 190%);
   border: 3px solid rgba(0, 0, 0, 0.23);
-  background: #fde9e2;
-  color: black;
+
+  color: white;
   height: 6vh;
   /* height: 8vh; */
 }
@@ -427,11 +429,13 @@ input {
 /* pregame 2 */
 
 .time-settings {
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 100%;
   animation: render 1s ease-in;
 }
 @keyframes render {

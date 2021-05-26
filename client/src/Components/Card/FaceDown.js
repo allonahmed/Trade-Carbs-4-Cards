@@ -30,6 +30,7 @@ class FaceDown extends Component {
             minWidth: "250px",
             minHeight: "340px",
             border: ".5px solid #f5f5f5 ",
+            borderRadius: "12px",
           }}
           src={this.props.back}
         />

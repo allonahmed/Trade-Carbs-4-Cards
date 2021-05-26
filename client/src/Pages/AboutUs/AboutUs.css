@@ -1,0 +1,53 @@
+.game-div{
+    background-color:#6d625c;
+    height: 25vh;
+    color: white;
+    text-align: center;
+}
+
+/* #MeetTheTeam{font-size: 32px ;} */
+.roundImage{
+     padding-top: 10px;
+     padding-bottom: 10px;
+        width: 25vh;
+        height: 25vh;
+        border-radius: 50%;
+}
+
+/* This class controls the size of the github and linkin icon */
+.iconsize{
+    width: 15px;
+    height: 15px;
+}
+
+/* //This is the class the controls the size of everthing after the image */
+.rightside{
+    display: flex;
+    flex-direction: row;
+    columns: 5;
+}
+
+/* .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+   */
+.fontheader{
+width: 50%;
+}
+
+#allon{ 
+   background-color:#410a14;
+   text-align: left;
+  
+}
+
+#daniel{
+    background-color:#ed0b0e;
+    text-align: left;
+}
+
+ #wengsing{
+    background-color: #bbb8b5;
+    text-align: left; 
+}
