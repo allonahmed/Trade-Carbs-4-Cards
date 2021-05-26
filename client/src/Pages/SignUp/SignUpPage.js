@@ -54,7 +54,7 @@ const SignUpPage = () => {
   }
   return (
     <div className="form-homepage">
-      <div className="form-container">
+      <div className="form-container sign-up-form-container">
         <h1 className="form-header">Sign Up For Carbs4Cards</h1>
 
         <form id="signup-form">
@@ -64,7 +64,7 @@ const SignUpPage = () => {
           <h4
             style={{ textAlign: "center", color: "red", marginBottom: "10px" }}
           >
-            {errorMessage.length != 0 ? errorMessage : null}
+            {errorMessage.length !== 0 ? errorMessage : null}
           </h4>
 
           <div className="form-field">
@@ -124,7 +124,7 @@ const SignUpPage = () => {
           </div>
 
           <div className="form-field">
-            <button onClick={SubmitForm}>Sign Up</button>
+            <button className="form-button" onClick={SubmitForm}>Sign Up</button>
             {errorMessage === "good" ? <Redirect to="/login" /> : null}
           </div>
         </form>

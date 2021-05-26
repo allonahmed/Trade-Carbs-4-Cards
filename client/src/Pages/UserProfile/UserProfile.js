@@ -244,6 +244,7 @@ class UserProfile extends React.Component {
     return (
       <div class="user-container">
         <div className="user-profile-container">
+
           {!this.state.avatarEdit && !this.state.cardEdit ? (
             <div className="user-profile-img">
               <div className="img-div">
@@ -329,6 +330,25 @@ class UserProfile extends React.Component {
                   </p> */}
                 </div>
               </div>
+
+          <div className="user-profile-img">
+            <div className="img-div">
+              <img
+                className="avatar"
+                src={this.state.picture==='default' ? White : this.state.picture}
+                alt="user profile picture"
+              />
+              <button
+                onClick={() => {
+                  this.setState((state) => ({
+                    avatarEdit: !this.state.avatarEdit,
+                  }));
+                }}
+                className="change-avatar"
+              >
+                change avatar
+              </button>
+
             </div>
           ) : this.state.cardEdit ? (
             <div className="card-edit-div">
