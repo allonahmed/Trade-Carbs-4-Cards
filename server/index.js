@@ -133,10 +133,60 @@ app.post("/update-avatar", (req, res) => {
     }
   });
 });
+app.post("/update-card", (req, res) => {
+  const card = req.body.card;
+  const email = req.body.email;
+  console.log(card);
 
-app.post('/post-workout', (req,res)=> {
+  const query = "UPDATE saw.userinfo SET cardback = ? WHERE email = ?";
+  db.query(query, [picture, email], (err, result) => {
+    if (err) console.log(err);
+    else {
+      req.session.user[0].card = card;
+      if (req.session.user) {
+        res.send();
+      }
+    }
+  });
+});
 
-})
+app.post("/update-stats", (req, res) => {
+  const email = req.body.email;
+  const push = req.body.totalpushups;
+  const jj = req.body.totaljj;
+  const squats = req.body.totalsquats;
+  const dips = req.body.totaldips;
+  const situps = req.body.totalsitups;
+
+  const query =
+    "UPDATE saw.userinfo SET  totaljj = ?, totalpushups = ?, totalsitups = ?, totalsquats = ?, totaldips = ? WHERE email = ? ";
+  db.query(query, [email, jj, push, situps, squats, dips], (err, result) => {
+    if (err) res.send(err);
+    else res.send(result);
+  });
+});
+
+app.post("/post-workout", (req, res) => {
+  const email = req.body.timed;
+  const timed = req.body.timed;
+  const interval = req.body.interval;
+  const time = req.body.time;
+  const workout = req.body.workout;
+  const reps = req.body.reps;
+  const timeposted = req.body.timePosted;
+  console.log(timeposted);
+
+  const query =
+    "INSERT into saw.workout(email, timed, timneinterval, totaltime, exercise, repetition, timeposted) VALUES (?,?,?,?,?,?,?)";
+  db.query(
+    query,
+    [email, timed, interval, time, workout, reps, timeposted],
+    (err, result) => {
+      if (err) res.send(err);
+      else res.send(result);
+    }
+  );
+});
 
 // app.delete("/logout", (req, res) => {
 //   if (req.session.user) {
@@ -179,6 +229,52 @@ app.get("/get-data", (req, res) => {
   }
 });
 
+app.post("/posts", (req, res) => {
+  const info = {
+    content: req.body.content,
+    post_date: req.body.post_date,
+    email: req.body.email,
+    first_name: req.session.user[0].firstname,
+    last_name: req.session.user[0].lastname,
+    level: req.session.user[0].level,
+  };
+  console.log("INDEX.JS", info);
+  const query =
+    "INSERT INTO saw.posts (content, post_date, email, first_name, last_name, level) VALUES (?,?,?,?,?,?)";
+  db.query(
+    query,
+    [
+      info.content,
+      info.post_date,
+      info.email,
+      info.first_name,
+      info.last_name,
+      info.level,
+    ],
+    (err, result) => {
+      if (err) console.log(err);
+      else console.log(result);
+    }
+  );
+});
+app.get("/posts", (req, res) => {
+  const query = "SELECT * FROM saw.posts";
+  db.query(query, (err, result) => {
+    if (err) console.log(err);
+    else {
+      res.send(result);
+    }
+  });
+});
+app.get("/get-workout", (req, res) => {
+  const query = "SELECT * FROM saw.workout";
+  db.query(query, (err, result) => {
+    if (err) console.log(err);
+    else {
+      res.send(result);
+    }
+  });
+});
 app.listen(3002, () => {
   console.log("my server is running on port 3002");
 });
