@@ -191,7 +191,11 @@ const Navigation = (props) => {
               exact
               to="/user-profile"
             >
-              <img className="profile-pic" src={props.picture} alt="pain/png" />
+              <img
+                className="profile-pic"
+                src={props.picture === "default" ? White : props.picture}
+                alt="pain/png"
+              />
             </Link>
             <div class="dropdown-content">
               <Link className="droplist" to="/user-profile">

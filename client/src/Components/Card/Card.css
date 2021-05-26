@@ -12,7 +12,7 @@
   transform-style: preserve-3d;
   animation: bg 0.9s;
 }
-@keyframes bg {
+/* @keyframes bg {
   0% {
     background-image: url("../../Media/yugioh.jpeg");
     background-size: cover;
@@ -21,7 +21,7 @@
   100% {
     background-image: none;
   }
-}
+} */
 
 .card::before,
 .card::after {

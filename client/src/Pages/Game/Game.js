@@ -11,6 +11,7 @@ import Planks from "../../Media/workout-icons/planks.png";
 import Pushups from "../../Media/workout-icons/pushups.png";
 import Situps from "../../Media/workout-icons/situps.jpeg";
 import Jumping from "../../Media/workout-icons/jumping.png";
+import Red from "../../Media/cards/reddefault.png";
 import ReactDOM from "react-dom";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import axios from "axios";
@@ -40,7 +41,7 @@ export default class Game extends Component {
         color: "black",
       },
       enhance: false,
-      selectedInterval: "",
+      selectedInterval: 0,
       countDown: "",
       userInfoClass: "user-info",
       question1: false, // if false, show question of exersize, else go to question2
@@ -55,8 +56,14 @@ export default class Game extends Component {
       level: "",
       exp: "",
       email: "",
-      startTime: "",
-      totalTime: "",
+      startTime: 0,
+      totalTime: 0,
+      totalpushups: 0,
+      totalsitups: 0,
+      totaljj: 0,
+      totalsquats: 0,
+      totaldips: 0,
+      cardback: Red,
     };
     this.drawNewCard = this.drawNewCard.bind(this);
   }
@@ -74,6 +81,7 @@ export default class Game extends Component {
     axios.get("http://localhost:3002/login").then((response) => {
       if (response.data.loggedIn == true) {
         this.setState((state) => ({
+          login: true,
           firstname: response.data.user[0].firstname,
           lastname: response.data.user[0].lastname,
           level: response.data.user[0].level,
@@ -82,9 +90,17 @@ export default class Game extends Component {
           // cardback: response.data.user[0].cardback,
           // bio: response.data.user[0].bio,
           email: response.data.user[0].email,
+          totalpushups: response.data.user[0].totalpushups,
+          totalsitups: response.data.user[0].totalsitups,
+          totaldips: response.data.user[0].totaldips,
+          totalsquats: response.data.user[0].totalsquats,
+          totaljj: response.data.user[0].totaljj,
+          cardback:
+            response.data.user[0].cardback === "default"
+              ? Red
+              : response.data.user[0].cardback,
         }));
       }
-      console.log(response.data.user);
     });
   }
   intervalChange = (e) => {
@@ -95,23 +111,26 @@ export default class Game extends Component {
   };
 
   render() {
-    let startTime;
-    const start = () => {
-      startTime = performance.now();
-    };
     const HandleClick = () => {
       // decriments the count after each click
-      if (this.state.count === 51) {
-        start();
-      } else {
-        var endTime = performance.now();
-        var difference = endTime - startTime;
-        difference /= 1000;
+      if (this.state.count === 52) {
         this.setState((state) => ({
-          totalTime: this.state.totalTime + difference,
+          startTime: Date.now(),
         }));
-        startTime = performance.now();
+      } else if (this.state.count === 2) {
+        var endTime = Date.now();
+        console.log("endtime", endTime);
+
+        var difference = endTime - this.state.startTime;
+
+        console.log("time remianing:", Math.floor(difference / 1000));
+
+        this.setState((state) => ({
+          totalTime: Math.floor(difference / 1000),
+        }));
       }
+      sendData();
+
       this.setState((state) => ({
         card: (state.card = state.cards[state.count - 1]), // sets the current card to the last element in the shuffled cards deck
         count: state.count - 1, // decriments the count for ux and to keep moving through the cards deck
@@ -122,7 +141,7 @@ export default class Game extends Component {
       // if (this.state.)
       if (this.state.selectedTime === "untimed") {
         this.setState((state) => ({
-          selectedInterval: (state.selectedInterval = ""),
+          selectedInterval: (state.selectedInterval = 0),
         }));
       }
     };
@@ -296,15 +315,21 @@ export default class Game extends Component {
           symbol={Img()}
           suit={cardV[cardV.length - 1]}
           value={cardV.length === 3 ? 10 : cardV[0]}
+          back={this.state.cardback}
         />
       )
     );
     const faceDown = this.state.cards.map((val, i) => (
-      <FaceDown classs="face-down" count={i} key={i} />
+      <FaceDown
+        classs="face-down"
+        count={i}
+        key={i}
+        back={this.state.cardback}
+      />
     ));
     console.log(
       "startTime:",
-      typeof this.state.startTime,
+      this.state.startTime,
       "  totaltime:",
       this.state.totalTime
     );
@@ -395,22 +420,48 @@ export default class Game extends Component {
     };
 
     const sendData = () => {
-      if (this.state.timed)
+      if (this.state.count === 1)
         axios.post("http://localhost:3002/post-workout", {
           email: this.state.email,
-          timed: this.state.selectedTime,
+          timed: this.state.timed === true ? "timed" : "untimed",
           interval: this.state.selectedInterval,
-          time: this.state.selectedInterval * 52,
+          time: this.state.timed
+            ? this.state.selectedInterval * 52
+            : this.state.totalTime,
           workout: this.state.selectedExercise,
           reps: 412,
+          timePosted: Date(),
         });
-      else {
-      }
+      axios.post("http://localhost:3002/update-stats", {
+        email: this.state.email,
+        totalpushups:
+          this.state.selectedExercise === "Push-ups"
+            ? this.state.totalpushups + 412
+            : this.state.totalpushups,
+        totalsitups:
+          this.state.selectedExercise === "Sit-ups"
+            ? this.state.totalsitups + 412
+            : this.state.totalsitups,
+        totaljj:
+          this.state.selectedExercise === "Jumping Jacks"
+            ? this.state.totaljj + 412
+            : this.state.totaljj,
+        totalsquats:
+          this.state.selectedExercise === "Squats"
+            ? this.state.totalsquats + 412
+            : this.state.totalsquats,
+        totaldips:
+          this.state.selectedExercise === "Dips"
+            ? this.state.totaldips + 412
+            : this.state.totaldips,
+        workout: this.state.workout,
+      });
     };
+    console.log("logged in? :", this.state.totalpushups);
+
     return (
       <div className="container">
         <div className="game-container">
-          {this.state.count === 0 ? sendData() : null}
           <div className="deck-spot">
             {this.state.play === true ? ( // only renders the cardList if the count is under 52, which will occur when you click the button after the first time
               <div className="two-decks">
@@ -638,6 +689,7 @@ export default class Game extends Component {
                       ? null
                       : { display: "none" }
                   }
+                  disabled={this.state.count === 0 ? "disable" : null}
                   onClick={HandleClick}
                 >
                   {" "}

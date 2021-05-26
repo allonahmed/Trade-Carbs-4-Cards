@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Card.css";
 import { randomNumber } from "../../helpers";
 import { AnimateKeyframes, Animate } from "react-simple-animate";
+import { keyframes } from "styled-components";
 import Yugioh from "../../Media/yugioh.jpeg";
 
 class Card extends Component {
@@ -12,8 +13,14 @@ class Card extends Component {
     this._translateX = `${randomNumber(0, 30, 1)}px`;
     this._translateY = `${randomNumber(0, 30, 1)}px`;
     this._rotation = `${randomNumber(-10, 10, 1)}deg`;
+
+    var flip = keyframes`
+        0% { backgroundImage: url('${this.props.back}') }
+        100% { backgroundImage: none }
+    `;
     this._style = {
       transform: `translate(${this._translateX},${this._translateY} ) rotate(${this._rotation})`,
+      animation: `$(flip) 0.9s`,
     };
   }
 
@@ -37,7 +44,11 @@ class Card extends Component {
         easeType="cubic-bezier(0.3, 0.46, 0.45, 0.94)"
         keyframes={[
           `transform: translateX(-400px) translateY(0px) rotateY(180deg)`,
+          "backgroundColor: red",
           `transform: translateX(0) translateY(${this._translateY}px)`,
+          "backgroundColor: black",
+          `backgroundImage: ${this.props.back}`,
+          `backgroundImage: none`,
         ]}
       >
         <div

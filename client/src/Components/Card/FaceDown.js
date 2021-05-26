@@ -25,7 +25,14 @@ class FaceDown extends Component {
   render() {
     return (
       <div className={this.props.classs} style={{ ...this._style }}>
-        <img style={{ minWidth: "250px", minHeight: "340px" }} src={Yugioh} />
+        <img
+          style={{
+            minWidth: "250px",
+            minHeight: "340px",
+            border: ".5px solid #f5f5f5 ",
+          }}
+          src={this.props.back}
+        />
       </div>
     );
   }
